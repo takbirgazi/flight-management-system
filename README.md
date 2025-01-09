@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Flight Management System
 
-## Getting Started
+The Flight Management System is a responsive and dynamic web application designed for managing flights, with features like user authentication, CRUD operations, and search/filter functionality.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **User Authentication**: Secure registration and login system.
+2. **Flight Management**:
+   - Add, edit, delete, and view flights.
+   - Search by flight number or airline.
+   - Filter flights by origin and destination.
+3. **Responsive Design**: Optimized for both desktop and mobile devices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies Used
 
-## Learn More
+- **Frontend**: React, Next.js, TypeScript
+- **Styling**: Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Form Handling**: React Hook Form
+-- **React Icons**: For Icons
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to Install and Run the Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/takbirgazi/flight-management-system.git
+   cd flight-management-system
+   ```
 
-## Deploy on Vercel
+2. **Install Dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Set Up Environment Variables**
+   Create a `.env` file in the root directory and include:
+   ```env
+   NEXT_PUBLIC_API_URL=https://flight-back.vercel.app/api/v1
+   JWT_SECRET=your_jwt_secret_key
+   DATABASE_URL=your_database_connection_string
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Run the Development Server**
+   ```bash
+   npm run dev
+   ```
+   Visit `http://localhost:3000` to access the application.
+
+---
+
+## How to Use
+
+1. **User Authentication**:
+   - Register a new account or log in with existing credentials.
+   - Access secured features after logging in.
+
+2. **Flight Management**:
+   - Use the dashboard to create, view, update, or delete flights.
+   - Utilize the search bar and filters to find specific flights.
+   - Click on a flight to view detailed information.
+
+---
+
+## Contact
+
+For queries or support, contact:
+- Name: Md. Takbir Gazi
+- Email: takbirgazibd@gmail.com
+- LinkedIn: [Md. Takbir Gazi](https://www.linkedin.com/in/takbirgazi)
