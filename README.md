@@ -8,7 +8,7 @@ The Flight Management System is a responsive and dynamic web application designe
 
 1. **User Authentication**: Secure registration and login system.
 2. **Flight Management**:
-   - Add, edit, delete, and view flights.
+   - Add and view flights.
    - Search by flight number or airline.
    - Filter flights by origin and destination.
 3. **Responsive Design**: Optimized for both desktop and mobile devices.
@@ -57,7 +57,7 @@ The Flight Management System is a responsive and dynamic web application designe
    - Access secured features after logging in.
 
 2. **Flight Management**:
-   - Use the dashboard to create, view, update, or delete flights.
+   - Log In Or Sign Up to Add Flights.
    - Utilize the search bar and filters to find specific flights.
    - Click on a flight to view detailed information.
 
