@@ -22,13 +22,9 @@ interface Flight {
     availableSeats: number;
 }
 
-interface FlightPageProps {
-    params: {
-        id: string;
-    };
-}
 
-const SingleFlightPage: React.FC<FlightPageProps> = () => {
+
+const SingleFlightPage = () => {
     const params = useParams();
     const id = params.id
     const [flight, setFlight] = useState<Flight | null>(null);
