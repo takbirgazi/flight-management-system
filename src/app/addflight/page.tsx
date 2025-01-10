@@ -3,6 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import Navbar from "@/components/Navbar/Navbar";
+import { useState } from "react";
 
 type FlightFormData = {
     flightNumber: string;
@@ -17,6 +18,7 @@ type FlightFormData = {
 };
 
 const AddFlightPage: React.FC = () => {
+    const [successMsg, setSuccessMsg] = useState("")
     const {
         register,
         handleSubmit,
@@ -31,10 +33,10 @@ const AddFlightPage: React.FC = () => {
                 price: parseFloat(String(data.price)),
                 availableSeats: parseInt(String(data.availableSeats)),
             });
-            alert("Flight created successfully!");
+            setSuccessMsg("New Flight Added Successfully!");
             reset();
         } catch (error) {
-            alert("Failed to create flight. Please try again.");
+            setSuccessMsg("");
             console.error("Error creating flight:", error);
         }
     };
@@ -45,6 +47,7 @@ const AddFlightPage: React.FC = () => {
             <div className="flex items-center justify-center py-12">
                 <div className="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg">
                     <h1 className="text-2xl font-bold text-gray-800 mb-6">Add New Flight</h1>
+                    <span className="text-green-800 text-sm font-semibold">{successMsg && successMsg}</span>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label htmlFor="flightNumber" className="block text-gray-600 mb-2">
@@ -53,6 +56,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="text"
                                 id="flightNumber"
+                                placeholder="e.g. AI2020"
                                 {...register("flightNumber", { required: "Flight number is required" })}
                                 className="w-full p-2 border rounded"
                             />
@@ -67,6 +71,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="text"
                                 id="airline"
+                                placeholder="e.g. Air Bangladesh"
                                 {...register("airline", { required: "Airline is required" })}
                                 className="w-full p-2 border rounded"
                             />
@@ -81,6 +86,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="text"
                                 id="origin"
+                                placeholder="e.g. Dhaka"
                                 {...register("origin", { required: "Origin is required" })}
                                 className="w-full p-2 border rounded"
                             />
@@ -95,6 +101,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="text"
                                 id="destination"
+                                placeholder="e.g. Bangalore"
                                 {...register("destination", { required: "Destination is required" })}
                                 className="w-full p-2 border rounded"
                             />
@@ -109,6 +116,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="number"
                                 id="price"
+                                placeholder="e.g. 7200"
                                 {...register("price", { required: "Price is required", valueAsNumber: true })}
                                 className="w-full p-2 border rounded"
                             />
@@ -165,6 +173,7 @@ const AddFlightPage: React.FC = () => {
                             <input
                                 type="number"
                                 id="availableSeats"
+                                placeholder="e.g. 10"
                                 {...register("availableSeats", {
                                     required: "Available seats are required",
                                     valueAsNumber: true,

@@ -1,6 +1,10 @@
 "use client"
+import axios from 'axios';
 import Link from 'next/link';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Cookies from "js-cookie";
+import { useRouter } from 'next/navigation';
 
 interface LoginFormInputs {
     name: string;
@@ -10,6 +14,10 @@ interface LoginFormInputs {
 }
 
 const Login = () => {
+    const [successMsg, setSuccessMsg] = useState("")
+    const [errorMsg, setErrorMsg] = useState("");
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -17,10 +25,25 @@ const Login = () => {
         formState: { errors },
     } = useForm<LoginFormInputs>();
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
-        reset();
-        console.log(data);
-        // Handle form submission logic here, such as making an API call.
+    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+        try {
+            const response = await axios.post("https://flight-back.vercel.app/api/v1/auth/login", data);
+            const token = response?.data?.data?.accessToken;
+            if (!token) {
+                return
+            } else {
+                Cookies.set("authToken", token, { expires: 1 }); // Save token in cookies for 1 day
+                setErrorMsg("");
+                setSuccessMsg("Log In Successfully!");
+                reset();
+                router.push("/flight")
+
+            }
+        } catch (error) {
+            setSuccessMsg("")
+            setErrorMsg("Email or Password is incorrect!");
+            console.log("Error creating flight:", error);
+        }
     };
 
     return (
@@ -30,7 +53,8 @@ const Login = () => {
                     <h2 className="text-2xl font-bold text-center text-blue-600">Log In</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-
+                        <span className="text-green-800 text-sm font-semibold">{successMsg && successMsg}</span>
+                        <span className="text-red-800 text-sm font-semibold">{errorMsg && errorMsg}</span>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-700 font-medium">
                                 Email

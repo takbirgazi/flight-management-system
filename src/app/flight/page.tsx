@@ -37,7 +37,6 @@ const FlightPage: React.FC = () => {
             console.error("Error fetching flights:", error);
         }
     };
-
     return (
         <main className="bg-[#eef6ff] min-h-screen">
             <Navbar />

@@ -21,9 +21,9 @@ The Flight Management System is a responsive and dynamic web application designe
 - **Styling**: Tailwind CSS
 - **Backend**: Next.js API Routes
 - **Database**: MongoDB
-- **Authentication**: JWT
 - **Form Handling**: React Hook Form
 - **React Icons**: For Icons
+- **JS Cookie**: For Cookie Management
 
 ---
 

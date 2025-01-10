@@ -1,5 +1,8 @@
 "use client"
+import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface SignUpFormInputs {
@@ -10,6 +13,9 @@ interface SignUpFormInputs {
 }
 
 const SignUp = () => {
+    const [successMsg, setSuccessMsg] = useState("");
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -18,12 +24,22 @@ const SignUp = () => {
         formState: { errors },
     } = useForm<SignUpFormInputs>();
 
-    const onSubmit: SubmitHandler<SignUpFormInputs> = (data) => {
-        if (data.password === data.confirmPassword) {
-            const { name, email, password } = data
-            const body = { name, email, password }
-            reset();
-            console.log(body);
+    const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
+        try {
+            if (data.password === data.confirmPassword) {
+                const { name, email, password } = data
+                const body = { name, email, password }
+                const response = await axios.post("https://flight-back.vercel.app/api/v1/auth/register", body);
+                const accountCreate = response?.data;
+                if (accountCreate) {
+                    setSuccessMsg("Account Created Successfully!");
+                    reset();
+                    router.push("/login");
+                }
+            }
+        } catch (error) {
+            setSuccessMsg("");
+            console.error("Error creating flight:", error);
         }
     };
 
@@ -32,8 +48,8 @@ const SignUp = () => {
             <main className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-1">
                 <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
                     <h2 className="text-2xl font-bold text-center text-blue-600">Create an Account</h2>
-
                     <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
+                        <span className="text-green-800 text-sm font-semibold">{successMsg && successMsg}</span>
                         <div className="mb-4">
                             <label htmlFor="name" className="block text-gray-700 font-medium">
                                 Name

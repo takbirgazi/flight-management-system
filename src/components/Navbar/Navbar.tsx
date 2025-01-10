@@ -1,14 +1,30 @@
 "use client"
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const router = useRouter();
+    // Check for token in cookies
+    useEffect(() => {
+        const token = Cookies.get("authToken");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+    const logOutHandler = () => {
+        Cookies.remove("authToken");
+        setIsLoggedIn(false);
+        router.push("/login");
+    }
     const navLinks = <>
         <Link href="/flight" >Flights</Link>
         <Link href="/addflight" >Add Flight</Link>
-        <Link href="/login" >Log In</Link>
+        {isLoggedIn ? <button onClick={logOutHandler}>Log Out</button> : <Link href="/login" >Log In</Link>}
     </>
     return (
         <div className="p-5 bg-[#eef6ff] sticky top-0 z-10 shadow-md shadow-[#374c4438]">
