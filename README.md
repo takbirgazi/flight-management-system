@@ -42,15 +42,7 @@ The Flight Management System is a responsive and dynamic web application designe
    yarn install
    ```
 
-3. **Set Up Environment Variables**
-   Create a `.env` file in the root directory and include:
-   ```env
-   NEXT_PUBLIC_API_URL=https://flight-back.vercel.app/api/v1
-   JWT_SECRET=your_jwt_secret_key
-   DATABASE_URL=your_database_connection_string
-   ```
-
-4. **Run the Development Server**
+3. **Run the Development Server**
    ```bash
    npm run dev
    ```
